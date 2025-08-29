@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Itineraries – Explore India</title>
+  <link rel="stylesheet" href="page1.css">
+  <script src="itineraries.js" defer></script>
+  <style>
+    /* Page-specific light styles (kept minimal, reusing page1.css base) */
+    .container { max-width: 1100px; margin: 0 auto; padding: 1rem; }
+    .controls { display:flex; gap:1rem; flex-wrap:wrap; align-items:flex-end; margin: 0.5rem 0 1rem 0; }
+    .accordion { display: grid; gap: 0.75rem; }
+    .day {
+      background: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .day-header { display:flex; justify-content:space-between; align-items:center; padding:0.75rem 1rem; cursor:pointer; }
+    .day-header h4 { margin: 0; }
+    .day-body { display:none; padding: 0 1rem 1rem 1rem; }
+    .day.open .day-body { display:block; }
+    .activity-list { list-style:none; padding:0; margin:0.5rem 0 0 0; }
+    .activity-list li { display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .activity-list li:last-child { border-bottom:none; }
+    .muted { color:#555; font-size: 0.95rem; }
+    .totals { background:#fff; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); padding:1rem; }
+  </style>
+  
+</head>
+<body>
+  <header>
+    <h1>Explore India 🇮🇳</h1>
+    <nav>
+      <a href="page1.html">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="itineraries.html">Itineraries</a>
+      <a href="map.html">Map</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Build Your Itinerary</h2>
+    <p class="muted">Start with a template or create your own plan. Add activities, estimate costs, and save your itinerary for later.</p>
+
+    <section class="controls">
+      <div>
+        <label for="template-select">Template</label><br>
+        <select id="template-select">
+          <option value="">Blank itinerary</option>
+          <option value="goa-weekend">Weekend in Goa (3 days)</option>
+          <option value="golden-triangle">Golden Triangle (5 days)</option>
+          <option value="kerala-seven">Kerala Nature Escape (7 days)</option>
+        </select>
+      </div>
+      <div>
+        <label>Travelers</label><br>
+        <input id="traveler-count" type="number" min="1" value="2" style="width:120px;">
+      </div>
+      <div>
+        <label>Currency</label><br>
+        <select id="currency-select">
+          <option value="INR">INR (₹)</option>
+          <option value="USD">USD ($)</option>
+        </select>
+      </div>
+      <button id="btn-new-day">Add Day</button>
+      <button id="btn-save" style="background:#2d7;">Save</button>
+      <button id="btn-load" style="background:#27a;">Load</button>
+      <button id="btn-clear" style="background:#a33;">Clear</button>
+      <button id="btn-print" style="background:#555;">Print</button>
+    </section>
+
+    <section id="itinerary-accordion" class="accordion"></section>
+
+    <section style="margin-top:1rem; display:flex; gap:1rem; flex-wrap:wrap;">
+      <div class="totals" style="flex:1; min-width:260px;">
+        <h3 style="margin-top:0;">Budget Overview</h3>
+        <p class="muted">Per-day activity costs multiplied by travelers. Taxes not included.</p>
+        <p>Subtotal per day: <strong id="subtotal-day">₹0</strong></p>
+        <p>Trip total: <strong id="trip-total">₹0</strong></p>
+      </div>
+      <div class="totals" style="flex:1; min-width:260px;">
+        <h3 style="margin-top:0;">Quick Add Activity</h3>
+        <label>Day #<br><input id="quick-day" type="number" min="1" value="1" style="width:100%;"></label>
+        <br>
+        <label>Title<br><input id="quick-title" type="text" placeholder="e.g., Beach time at Baga" style="width:100%;"></label>
+        <br>
+        <label>Estimated Cost (per traveler)<br><input id="quick-cost" type="number" min="0" placeholder="e.g., 800" style="width:100%;"></label>
+        <br>
+        <button id="quick-add" style="margin-top:0.5rem;">Add Activity</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Explore India. All rights reserved.</p>
+  </footer>
+</body>
+</html>
+
+

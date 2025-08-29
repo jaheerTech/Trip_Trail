@@ -1,0 +1,39 @@
+/* Map page styling aligned with site theme */
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+  color: #4b074b;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.page { display: grid; grid-template-rows: auto auto 1fr auto; min-height: 100%; }
+
+/* Reuse header/nav look from main site (colors come from page1.css) */
+header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 1.25rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+header h1 { margin: 0; font-size: 1.4rem; }
+header nav a { margin: 0 0.75rem; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 1rem; padding: 0.25rem 0.5rem; border-radius: 6px; }
+header nav a[aria-current="page"] { background: rgba(255,255,255,0.18); }
+
+/* Controls toolbar */
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 16px; background: #ffffff; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.toolbar input, .toolbar select { padding: 10px 12px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.12); min-width: 200px; background: #fff; color: #2a2a2a; }
+.toolbar button { padding: 10px 14px; border-radius: 10px; border: 1px solid #764ba2; background: #ffffff; color: #4b074b; font-weight: 600; cursor: pointer; }
+.toolbar button:hover { background: #f7f7ff; border-color: #667eea; }
+
+/* Map container */
+#map { width: 100%; height: calc(100vh - 200px); background: #c4d468; }
+
+/* Stats pills */
+.stats { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px 16px; background: #fafafa; border-top: 1px solid rgba(0,0,0,0.06); }
+.pill { background: #b4be55; border: 1px solid #cfe8d5; color: #0a6b2e; padding: 4px 10px; border-radius: 999px; font-size: 0.95rem; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .toolbar input { min-width: 140px; flex: 1 1 140px; }
+  #map { height: calc(100vh - 240px); }
+}
+
+

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Best Places to Visit in India</title>
+  <link rel="stylesheet" href="page1.css">
+</head>
+<body>
+  <header>
+    <h1>Explore India 🇮🇳</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="itineraries.html">Itineraries</a>
+      <a href="map.html">Map</a>
+      <a href="#contact">Contact</a>
+      </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-bg">
+      <span class="slide slide1"></span>
+      <span class="slide slide2"></span>
+      <span class="slide slide3"></span>
+    </div>
+    <h2>Discover Hidden Gems & Iconic Wonders</h2>
+    <p>Plan your next adventure with curated travel guides across India.</p>
+    <button onclick="explore()">Start Exploring</button>
+  </section>
+
+  <section class="features">
+    <h3>Top Picks</h3>
+    <div class="viewport">
+      <div class="cards">
+        <div class="card">
+          <img src="images\tajmahal.jpg" alt="Taj Mahal" loading="lazy" decoding="async">
+          <h4>Taj Mahal</h4>
+          <p>Agra, Uttar Pradesh</p>
+        </div>
+        <div class="card">
+          <img src="images\kerlabackwater.jpg" alt="Kerala Backwaters" loading="lazy" decoding="async">
+          <h4>Kerala Backwaters</h4>
+          <p>Alleppey, Kerala</p>
+        </div>
+        <div class="card">
+          <img src="images\ladhak.jpg" alt="Ladakh" loading="lazy" decoding="async">
+          <h4>Ladakh</h4>
+          <p>Leh, Jammu & Kashmir</p>
+        </div>
+      
+        <div class="card">
+          <img src="images\goa.jpg" alt="Goa Beaches" loading="lazy" decoding="async">
+          <h4>Goa Beaches</h4>
+          <p>Goa</p>
+        </div>
+        <div class="card">
+          <img src="images\hampi.jpg" alt="Hampi" loading="lazy" decoding="async">
+          <h4>Hampi</h4>
+          <p>Karnataka</p>
+        </div>
+        <div class="card">
+          <img src="images\delhi.jpg" alt="Delhi" loading="lazy" decoding="async">
+          <h4>Delhi</h4>
+          <p>Capital of India</p> 
+  
+        </div>
+        <div class="card">
+          <img src="images\darjeeling.jpg" alt="Darjeeling" loading="lazy" decoding="async">
+          <h4>Darjeeling</h4>
+          <p>West Bengal</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p>&copy; 2025 Explore India. All rights reserved.</p>
+  </footer>
+
+  <div id="yatrabot">
+    <button id="yatrabot-toggle" aria-label="Open chat with YatraBot">💬</button>
+    <div id="yatrabot-panel" aria-live="polite" aria-label="YatraBot chat" hidden>
+      <div class="yatra-header">
+        <span class="yatra-dot"></span>
+        <strong>YatraBot</strong>
+        <span class="yatra-sub">Your Indian Travel Assistant 🇮🇳</span>
+        <button id="yatrabot-close" aria-label="Close chat">✕</button>
+      </div>
+      <div id="yatra-messages" class="yatra-messages"></div>
+      <div class="yatra-input">
+        <input id="yatra-input" type="text" placeholder="Ask about places, hotels, tips..." autocomplete="off" />
+        <button id="yatra-cancel" type="button" title="Close chat">Cancel</button>
+        <button id="yatra-send" type="button">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="page1.js"></script>
+  <script>
+    (function() {
+      const API_BASE = 'http://localhost:5000';
+      const toggleBtn = document.getElementById('yatrabot-toggle');
+      const closeBtn = document.getElementById('yatrabot-close');
+      const panel = document.getElementById('yatrabot-panel');
+      const messages = document.getElementById('yatra-messages');
+      const input = document.getElementById('yatra-input');
+      const send = document.getElementById('yatra-send');
+      const cancelBtn = document.getElementById('yatra-cancel');
+      let currentRequestController = null;
+      let isConnected = false;
+
+      function toggle(open) {
+        const shouldOpen = open !== undefined ? open : panel.hasAttribute('hidden');
+        if (shouldOpen) {
+          panel.removeAttribute('hidden');
+          if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
+          input.focus();
+          if (!messages.dataset.booted) {
+            append('bot', "🇮🇳 Namaste! I'm YatraBot. Ask me about Taj Mahal, Goa, Kerala, best time to visit, hotels, and more. Type 'help' for suggestions.");
+            messages.dataset.booted = '1';
+          }
+        } else {
+          panel.setAttribute('hidden', '');
+          if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      }
+
+      function append(role, text) {
+        const row = document.createElement('div');
+        row.className = 'yatra-row ' + role;
+        const avatar = document.createElement('div');
+        avatar.className = 'yatra-avatar';
+        avatar.textContent = role === 'user' ? 'U' : 'B';
+        const bubble = document.createElement('div');
+        bubble.className = 'yatra-bubble';
+        bubble.textContent = text;
+        row.appendChild(avatar);
+        row.appendChild(bubble);
+        messages.appendChild(row);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      async function sendMessage() {
+        const text = (input.value || '').trim();
+        if (!text) return;
+        input.value = '';
+        append('user', text);
+        try {
+          // Abort any lingering request before sending a new one
+          if (currentRequestController) {
+            try { currentRequestController.abort(); } catch (_) {}
+          }
+          currentRequestController = new AbortController();
+          const res = await fetch(API_BASE + '/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text }),
+            signal: currentRequestController.signal
+          });
+          const data = await res.json();
+          append('bot', data.reply || 'Sorry, I had trouble replying.');
+        } catch (e) {
+          append('bot', 'Oops, cannot reach YatraBot. Is the server running on 5000?');
+        }
+      }
+
+      // Proactively connect to the server on load (warm-up/ping)
+      async function autoConnect() {
+        try {
+          const controller = new AbortController();
+          currentRequestController = controller;
+          const res = await fetch(API_BASE + '/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            // Lightweight ping so the server/app is warm
+            body: JSON.stringify({ message: 'hello' }),
+            signal: controller.signal,
+            keepalive: true
+          });
+          // Even if JSON parse fails, we consider it reachable
+          try { await res.json(); } catch (_) {}
+          isConnected = true;
+        } catch (_) {
+          isConnected = false;
+        }
+      }
+
+      // Gracefully notify server and cancel in-flight requests on unload
+      function autoDisconnect() {
+        try {
+          if (currentRequestController) {
+            try { currentRequestController.abort(); } catch (_) {}
+            currentRequestController = null;
+          }
+          const payload = JSON.stringify({ message: 'bye' });
+          // Prefer sendBeacon for reliability during unload
+          if (navigator.sendBeacon) {
+            const blob = new Blob([payload], { type: 'application/json' });
+            navigator.sendBeacon(API_BASE + '/chat', blob);
+          } else {
+            // Fallback: fire-and-forget fetch with keepalive
+            fetch(API_BASE + '/chat', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: payload,
+              keepalive: true
+            }).catch(() => {});
+          }
+        } catch (_) {}
+      }
+
+      function wireEvents() {
+        if (!panel || !messages || !input) return;
+        // Attempt connection right after wiring events
+        autoConnect();
+        document.addEventListener('click', (e) => {
+          const t = e.target;
+          if (!t) return;
+          if (t === toggleBtn) {
+            e.preventDefault();
+            toggle();
+          } else if (t === closeBtn || t === cancelBtn) {
+            e.preventDefault();
+            input.value = '';
+            toggle(false);
+          } else if (t === send) {
+            e.preventDefault();
+            sendMessage();
+          }
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && document.activeElement === input) {
+            e.preventDefault();
+            sendMessage();
+          } else if (e.key === 'Escape') {
+            toggle(false);
+          }
+        });
+        // Disconnect hooks
+        window.addEventListener('pagehide', autoDisconnect);
+        window.addEventListener('beforeunload', autoDisconnect);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', wireEvents);
+      } else {
+        wireEvents();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    color: #4b074b;
+  }
+  
+  header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+  }
+
+  header h1 {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 1rem 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #ffffff, #f0f8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  header nav {
+    position: relative;
+    z-index: 1;
+  }
+  
+  nav a {
+    margin: 0 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    position: relative;
+    overflow: visible;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  nav a:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+  }
+
+  nav a:active {
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  nav a::before { display: none; }
+  
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: transparent;
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero .hero-bg .slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: hero-slideshow 18s infinite;
+  }
+  .hero .hero-bg .slide1 { background-image: url('images/heroimg1.jpg'); animation-delay: 0s; }
+  .hero .hero-bg .slide2 { background-image: url('images/heroimg2.jpg'); animation-delay: 6s; }
+  .hero .hero-bg .slide3 { background-image: url('images/heroimg3.jpg'); animation-delay: 12s; }
+
+  @keyframes hero-slideshow {
+    0% { opacity: 0; transform: scale(1.05); }
+    6% { opacity: 1; }
+    28% { opacity: 1; }
+    34% { opacity: 0; }
+    100% { opacity: 0; transform: scale(1); }
+  }
+
+  /* keep text and buttons above the background */
+  .hero h2, .hero p, .hero button { position: relative; z-index: 1; }
+
+  /* Respect reduced motion preferences: pause slideshow and show first image */
+  @media (prefers-reduced-motion: reduce) {
+    .hero .hero-bg .slide { animation: none; opacity: 0; }
+    .hero .hero-bg .slide1 { opacity: 1; }
+  }
+  .hero h2 {
+    margin: 0 0 0.5rem 0;
+    color: #4b074b;
+    font-size: 2.5rem;
+    background: rgba(255,255,255,0.9);
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+  }
+  .hero p {
+    margin: 0 0 1rem 0;
+    color: #4b074b;
+    font-size: 1.2rem;
+    background: rgba(255,255,255,0.9);
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+  }
+  .hero button {
+    padding: 0.6rem 1.1rem;
+    background: rgba(255,255,255,0.95);
+    color: #4b074b;
+    border: 2px solid #764ba2;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .hero button:hover {
+    background: #fff;
+    border-color: #667eea;
+  }
+
+  /* Hero gallery: three images side-by-side with creative styling */
+  .hero-gallery {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .hero-strip {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    max-width: 960px;
+    width: calc(100% - 2rem);
+  }
+
+  .hero-tile {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0;
+    background: transparent;
+  } 
+
+  .hero-tile img {
+    display: block;
+    width: 80%;
+    height: 120px;
+    object-fit: cover;
+  }
+
+  .hero-tile::after { display: none; }
+
+  .hero-tile figcaption { display: none; }
+
+  .hero-strip:hover .hero-tile { transform: none; }
+  .hero-tile:hover img { transform: none; }
+  
+  button {
+    padding: 0.5rem 1rem;
+    background: #5997ca;
+    color: rgb(113, 206, 201);
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #0063b3;
+  }
+  
+  .featured {
+    padding: 2rem;
+  }
+  
+  /* Features slider layout */
+  .features .viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+  .features .cards {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    will-change: transform;
+    transition: transform 600ms ease;
+  }
+
+  .cards {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .card {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 200px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .card img {
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* account for sticky header */
+  }
+
+  /* Responsive design for hero section */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 2rem 1rem;
+      min-height: 50vh;
+      background-attachment: scroll;
+    }
+    .hero-strip { gap: 0.5rem; }
+    .hero-tile img {
+      height: 150px;
+    }
+    
+    .hero h2 {
+      font-size: 2rem;
+    }
+    
+    .hero p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: 1.5rem 0.5rem;
+      min-height: 40vh;
+    }
+    .hero-strip {
+      flex-direction: column;
+      width: 100%;
+      max-width: 520px;
+    }
+    .hero-tile img {
+      height: 160px;
+    }
+    
+    .hero h2 {
+      font-size: 1.5rem;
+    }
+    
+    .hero p {
+      font-size: 0.9rem;
+    }
+
+    header {
+      padding: 1rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin: 0 0 0.8rem 0;
+    }
+
+    nav a {
+      margin: 0 0.5rem;
+      padding: 0.4rem 0.8rem;
+      font-size: 1rem;
+    }
+  }
+
+  /* Floating Indian flag badge */
+  .flag-badge {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    font-size: 28px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    z-index: 999;
+  }
+
+  .flag-badge:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+  }
+
+  /* YatraBot floating widget */
+  /* ensure hidden attribute always hides */
+  [hidden] { display: none !important; }
+
+  #yatrabot {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 9999;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+  #yatrabot-toggle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(180deg, #38bdf8, #22d3ee);
+    color: #06202b;
+    font-size: 26px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.28);
+    border: 2px solid rgba(255,255,255,0.85);
+    position: relative;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    animation: yatra-pulse 2.4s ease-out infinite;
+  }
+  #yatrabot-toggle:hover { transform: translateY(-1px) scale(1.03); box-shadow: 0 18px 36px rgba(0,0,0,0.32); }
+  #yatrabot-toggle:active { transform: scale(0.98); }
+  #yatrabot-toggle:focus-visible { outline: 3px solid rgba(56,189,248,0.6); outline-offset: 3px; }
+
+  /* Small label on hover */
+  #yatrabot-toggle::after {
+    content: 'Chat';
+    position: absolute;
+    right: 76px;
+    bottom: 8px;
+    background: #0f172a;
+    color: #e5e7eb;
+    border: 1px solid rgba(148,163,184,0.35);
+    border-radius: 8px;
+    padding: 6px 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  #yatrabot-toggle:hover::after { opacity: 1; transform: translateY(0); }
+
+  /* Notification dot to attract attention */
+  #yatrabot-toggle::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #f59e0b; /* amber */
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+    animation: yatra-ping 2s infinite;
+  }
+
+  @keyframes yatra-pulse {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.08); }
+    100% { filter: brightness(1); }
+  }
+  @keyframes yatra-ping {
+    0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    #yatrabot-toggle { animation: none; }
+    #yatrabot-toggle::before { animation: none; }
+  }
+  #yatrabot-panel {
+    position: absolute;
+    right: 0;
+    bottom: 72px;
+    width: min(90vw, 360px);
+    height: 460px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    background: #0f172a;
+    color: #e5e7eb;
+    border: 1px solid rgba(148,163,184,0.25);
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+    overflow: hidden;
+  }
+  .yatra-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: linear-gradient(180deg, rgba(31,41,55,0.7), rgba(17,24,39,0.9));
+    border-bottom: 1px solid rgba(148,163,184,0.2);
+  }
+  .yatra-header .yatra-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #22d3ee, #38bdf8);
+    box-shadow: 0 0 12px rgba(56,189,248,0.6);
+  }
+  .yatra-header .yatra-sub {
+    margin-left: auto;
+    font-size: 12px;
+    color: #9ca3af;
+  }
+  #yatrabot-close {
+    margin-left: 8px;
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .yatra-messages {
+    padding: 12px;
+    overflow: auto;
+    background:
+      radial-gradient(800px 200px at 30% -10%, rgba(34,211,238,0.08), transparent),
+      radial-gradient(800px 300px at 80% -10%, rgba(56,189,248,0.08), transparent);
+  }
+  .yatra-row {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 8px;
+    align-items: start;
+    margin-bottom: 8px;
+  }
+  .yatra-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at 30% 30%, #22d3ee, #38bdf8);
+    color: #06202b;
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .yatra-bubble {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(148,163,184,0.2);
+    background: linear-gradient(180deg, rgba(17,24,39,0.85), rgba(15,23,42,0.9));
+    line-height: 1.45;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  .yatra-row.user .yatra-bubble {
+    background: linear-gradient(180deg, rgba(2,6,23,0.9), rgba(15,23,42,0.9));
+  }
+  .yatra-input {
+    display: grid;
+    grid-template-columns: 1fr 80px 72px;
+    gap: 8px;
+    padding: 10px;
+    border-top: 1px solid rgba(148,163,184,0.2);
+    background: linear-gradient(180deg, rgba(31,41,55,0.7), rgba(17,24,39,0.9));
+  }
+  .yatra-input input {
+    background: rgba(2,6,23,0.6);
+    color: #e5e7eb;
+    border: 1px solid rgba(148,163,184,0.25);
+    border-radius: 10px;
+    padding: 10px 12px;
+    outline: none;
+  }
+  .yatra-input input:focus {
+    border-color: rgba(56,189,248,0.55);
+    box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
+  }
+  .yatra-input button {
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #38bdf8, #22d3ee);
+    color: #06202b;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  #yatra-cancel {
+    background: transparent;
+    border: 1px solid rgba(148,163,184,0.35);
+    color: #e5e7eb;
+    font-weight: 600;
+  }

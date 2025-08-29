@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Map Planner</title>
+  <link rel="stylesheet" href="page1.css">
+  <link rel="stylesheet" href="map.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Travel Map Planner</h1>
+      <nav>
+        <a href="page1.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="itineraries.html">Itineraries</a>
+        <a href="#" aria-current="page">Map</a>
+      </nav>
+    </header>
+
+    <div class="toolbar">
+      <input id="origin" type="text" placeholder="Origin (e.g., Delhi)" list="india-places" />
+      <input id="waypoints" type="text" placeholder="Waypoints (comma separated)" list="india-places" />
+      <input id="destination" type="text" placeholder="Destination (e.g., Agra)" list="india-places" />
+      <select id="mode">
+        <option value="driving">Driving</option>
+        <option value="cycling">Cycling</option>
+        <option value="walking">Walking</option>
+      </select>
+      <select id="optimize">
+        <option value="fastest">Fastest</option>
+        <option value="shortest">Shortest</option>
+      </select>
+      <button id="plan">Plan Route</button>
+      <button id="clear">Clear</button>
+    </div>
+
+    <div id="map" role="region" aria-label="Map"></div>
+    <datalist id="india-places">
+      <option value="Delhi"></option>
+      <option value="New Delhi"></option>
+      <option value="Mumbai"></option>
+      <option value="Kolkata"></option>
+      <option value="Chennai"></option>
+      <option value="Bengaluru"></option>
+      <option value="Hyderabad"></option>
+      <option value="Pune"></option>
+      <option value="Ahmedabad"></option>
+      <option value="Jaipur"></option>
+      <option value="Surat"></option>
+      <option value="Lucknow"></option>
+      <option value="Kanpur"></option>
+      <option value="Nagpur"></option>
+      <option value="Indore"></option>
+      <option value="Bhopal"></option>
+      <option value="Patna"></option>
+      <option value="Vadodara"></option>
+      <option value="Ghaziabad"></option>
+      <option value="Agra"></option>
+      <option value="Varanasi"></option>
+      <option value="Prayagraj"></option>
+      <option value="Meerut"></option>
+      <option value="Nashik"></option>
+      <option value="Faridabad"></option>
+      <option value="Rajkot"></option>
+      <option value="Srinagar"></option>
+      <option value="Amritsar"></option>
+      <option value="Chandigarh"></option>
+      <option value="Jammu"></option>
+      <option value="Shimla"></option>
+      <option value="Manali"></option>
+      <option value="Leh"></option>
+      <option value="Ladakh"></option>
+      <option value="Udaipur"></option>
+      <option value="Jodhpur"></option>
+      <option value="Jaisalmer"></option>
+      <option value="Pushkar"></option>
+      <option value="Rishikesh"></option>
+      <option value="Haridwar"></option>
+      <option value="Dehradun"></option>
+      <option value="Mussoorie"></option>
+      <option value="Nainital"></option>
+      <option value="Almora"></option>
+      <option value="Darjeeling"></option>
+      <option value="Gangtok"></option>
+      <option value="Shillong"></option>
+      <option value="Kohima"></option>
+      <option value="Aizawl"></option>
+      <option value="Guwahati"></option>
+      <option value="Kaziranga National Park"></option>
+      <option value="Kolkata"></option>
+      <option value="Puri"></option>
+      <option value="Bhubaneswar"></option>
+      <option value="Konark Sun Temple"></option>
+      <option value="Ranchi"></option>
+      <option value="Bodh Gaya"></option>
+      <option value="Gaya"></option>
+      <option value="Sarnath"></option>
+      <option value="Ayodhya"></option>
+      <option value="Mathura"></option>
+      <option value="Vrindavan"></option>
+      <option value="Ajmer"></option>
+      <option value="Mount Abu"></option>
+      <option value="Kutch"></option>
+      <option value="Somnath"></option>
+      <option value="Dwarka"></option>
+      <option value="Gir National Park"></option>
+      <option value="Goa"></option>
+      <option value="Panaji"></option>
+      <option value="Calangute"></option>
+      <option value="Gokarna"></option>
+      <option value="Mysuru"></option>
+      <option value="Bengaluru"></option>
+      <option value="Coorg"></option>
+      <option value="Hampi"></option>
+      <option value="Mangalore"></option>
+      <option value="Ooty"></option>
+      <option value="Kodaikanal"></option>
+      <option value="Madurai"></option>
+      <option value="Rameswaram"></option>
+      <option value="Kanyakumari"></option>
+      <option value="Alleppey"></option>
+      <option value="Munnar"></option>
+      <option value="Kochi"></option>
+      <option value="Thiruvananthapuram"></option>
+      <option value="Wayanad"></option>
+      <option value="Thekkady"></option>
+      <option value="Andaman and Nicobar Islands"></option>
+      <option value="Port Blair"></option>
+      <option value="Havelock Island"></option>
+      <option value="Neil Island"></option>
+      <option value="Lakshadweep"></option>
+      <option value="Pondicherry"></option>
+      <option value="Tirupati"></option>
+      <option value="Visakhapatnam"></option>
+      <option value="Araku Valley"></option>
+      <option value="Sikkim"></option>
+      <option value="Lonavala"></option>
+      <option value="Mahabaleshwar"></option>
+      <option value="Aurangabad"></option>
+      <option value="Ajanta Caves"></option>
+      <option value="Ellora Caves"></option>
+      <option value="Shirdi"></option>
+      <option value="Pune"></option>
+      <option value="Nashik"></option>
+      <option value="Alleppey Backwaters"></option>
+      <option value="Taj Mahal"></option>
+      <option value="Red Fort"></option>
+      <option value="Qutub Minar"></option>
+      <option value="India Gate"></option>
+      <option value="Golden Temple"></option>
+      <option value="City Palace Udaipur"></option>
+      <option value="Amber Fort"></option>
+      <option value="Hawa Mahal"></option>
+      <option value="Jal Mahal"></option>
+      <option value="Tirupati"></option>
+      <option value="Nellore"></option>
+    </datalist>
+    <div class="stats" id="stats" aria-live="polite"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="map.js"></script>
+</body>
+</html>
+

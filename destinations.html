@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destinations in India</title>
+  <link rel="stylesheet" href="page1.css">
+  <script src="destinations.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Explore India 🇮🇳</h1>
+    <nav>
+      <a href="page1.html">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="itineraries.html">Itineraries</a>
+      <a href="map.html">Map</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <main class="featured" style="max-width:1100px;margin:0 auto;">
+    <h2>Top Destinations</h2>
+    <p>Browse popular places across India and start planning your trip.</p>
+
+    <section id="filters" style="display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap;margin:1rem 0 1.5rem 0;">
+      <div>
+        <label for="filter-region">Region</label><br>
+        <select id="filter-region">
+          <option value="">All regions</option>
+          <option value="north">North</option>
+          <option value="south">South</option>
+          <option value="west">West</option>
+          <option value="east">East</option>
+          <option value="central">Central</option>
+        </select>
+      </div>
+      <div>
+        <label for="filter-experience">Experience</label><br>
+        <select id="filter-experience">
+          <option value="">All types</option>
+          <option value="heritage">Heritage</option>
+          <option value="nature">Nature</option>
+          <option value="adventure">Adventure</option>
+          <option value="beach">Beaches</option>
+          <option value="city">City</option>
+        </select>
+      </div>
+      <div>
+        <label for="max-budget">Max budget per day (₹)</label><br>
+        <input id="max-budget" type="number" min="0" placeholder="e.g. 4000" style="width:160px;">
+      </div>
+      <button id="apply-filters">Apply Filters</button>
+      <button id="reset-filters" style="background:#555">Reset</button>
+    </section>
+
+    <section class="cards" id="destinations-grid" style="flex-wrap:wrap; justify-content:flex-start; gap:1.25rem;">
+      <div class="card" data-id="taj" data-region="north" data-experience="heritage" data-cost="3500">
+        <img src="images/tajmahal.jpg" alt="Taj Mahal" loading="lazy" decoding="async">
+        <h4>Taj Mahal</h4>
+        <p>Agra, Uttar Pradesh</p>
+        <p><strong>From ₹3,500/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Taj_Mahal">Details</button>
+        </div>
+      </div>
+      <div class="card" data-id="kerala" data-region="south" data-experience="nature" data-cost="2800">
+        <img src="images/kerlabackwater.jpg" alt="Kerala Backwaters" loading="lazy" decoding="async">
+        <h4>Kerala Backwaters</h4>
+        <p>Alleppey, Kerala</p>
+        <p><strong>From ₹2,800/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Alappuzha">Details</button>
+        </div>
+      </div>
+      <div class="card" data-id="ladakh" data-region="north" data-experience="adventure" data-cost="4200">
+        <img src="images/ladhak.jpg" alt="Ladakh" loading="lazy" decoding="async">
+        <h4>Ladakh</h4>
+        <p>Leh, Jammu & Kashmir</p>
+        <p><strong>From ₹4,200/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Leh">Details</button>
+        </div>
+      </div>
+      <div class="card" data-id="goa" data-region="west" data-experience="beach" data-cost="3000">
+        <img src="images/goa.jpg" alt="Goa Beaches" loading="lazy" decoding="async">
+        <h4>Goa Beaches</h4>
+        <p>Goa</p>
+        <p><strong>From ₹3,000/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Goa">Details</button>
+        </div>
+      </div>
+      <div class="card" data-id="hampi" data-region="south" data-experience="heritage" data-cost="2600">
+        <img src="images/hampi.jpg" alt="Hampi" loading="lazy" decoding="async">
+        <h4>Hampi</h4>
+        <p>Karnataka</p>
+        <p><strong>From ₹2,600/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Hampi">Details</button>
+        </div>
+      </div>
+      <div class="card" data-id="delhi" data-region="north" data-experience="city" data-cost="2400">
+        <img src="images/delhi.jpg" alt="Delhi" loading="lazy" decoding="async">
+        <h4>Delhi</h4>
+        <p>Capital of India</p>
+        <p><strong>From ₹2,400/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Delhi">Details</button>
+        </div>
+      </div>
+      <div class="card" data-id="darjeeling" data-region="east" data-experience="nature" data-cost="2700">
+        <img src="images/darjeeling.jpg" alt="Darjeeling" loading="lazy" decoding="async">
+        <h4>Darjeeling</h4>
+        <p>West Bengal</p>
+        <p><strong>From ₹2,700/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Darjeeling">Details</button>
+        </div>
+      </div>
+      <div class="card" data-id="jaipur" data-region="north" data-experience="heritage" data-cost="2500">
+        <img src="images/jaipur.jpg" alt="Jaipur" loading="lazy" decoding="async">
+        <h4>Jaipur</h4>
+        <p>Rajasthan</p>
+        <p><strong>From ₹2,500/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Jaipur">Details</button>
+        </div>
+      </div>
+      <div class="card" data-id="varanasi" data-region="north" data-experience="heritage" data-cost="2300">
+        <img src="images/varanasi.jpg" alt="Varanasi" loading="lazy" decoding="async">
+        <h4>Varanasi</h4>
+        <p>Uttar Pradesh</p>
+        <p><strong>From ₹2,300/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Varanasi">Details</button>
+        </div>
+      </div>
+      <div class="card" data-id="rishikesh" data-region="north" data-experience="adventure" data-cost="2200">
+        <img src="images/rishikesh.jpg" alt="Rishikesh" loading="lazy" decoding="async">
+        <h4>Rishikesh</h4>
+        <p>Uttarakhand</p>
+        <p><strong>From ₹2,200/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Rishikesh">Details</button>
+        </div>
+      </div>
+      <div class="card" data-id="udaipur" data-region="west" data-experience="heritage" data-cost="2600">
+        <img src="images/udaipur.jpg" alt="Udaipur" loading="lazy" decoding="async">
+        <h4>Udaipur</h4>
+        <p>Rajasthan</p>
+        <p><strong>From ₹2,600/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Udaipur">Details</button>
+        </div>
+      </div>
+    
+      <div class="card" data-id="mysore" data-region="south" data-experience="heritage" data-cost="2400">
+        <img src="images/mysuru.jpg" alt="Mysuru" loading="lazy" decoding="async">
+        <h4>Mysuru</h4>
+        <p>Karnataka</p>
+        <p><strong>From ₹2,400/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Mysore">Details</button>
+        </div>
+      </div>
+      <div class="card" data-id="munnar" data-region="south" data-experience="nature" data-cost="2100">
+        <img src="images/munnar.jpg" alt="Munnar" loading="lazy" decoding="async">
+        <h4>Munnar</h4>
+        <p>Kerala</p>
+        <p><strong>From ₹2,100/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="https://en.wikipedia.org/wiki/Munnar">Details</button>
+        </div>
+      </div>
+      <div class="card" data-id="andaman" data-region="east" data-experience="beach" data-cost="4500">
+        <img src="images/andaman.jpg" alt="Andaman Islands" loading="lazy" decoding="async">
+        <h4>Andaman Islands</h4>
+        <p>Andaman & Nicobar</p>
+        <p><strong>From ₹4,500/day</strong></p>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-add">Add to Itinerary</button>
+          <button class="btn-details" data-url="images\Andaman.jpg">Details</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="itinerary" style="margin-top:2rem;">
+      <h3>Your Itinerary & Budget</h3>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-start;">
+        <div style="flex:2;min-width:260px;">
+          <ul id="itinerary-list" style="list-style:none;padding:0;margin:0;"></ul>
+          <button id="clear-itinerary" style="margin-top:0.75rem;background:#a33">Clear Itinerary</button>
+        </div>
+        <div style="flex:1;min-width:240px;background:#fff;border-radius:8px;padding:1rem;box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+          <label>Days<br><input id="days" type="number" min="1" value="3" style="width:100%;"></label>
+          <br>
+          <label>Travelers<br><input id="travelers" type="number" min="1" value="2" style="width:100%;"></label>
+          <p style="margin-top:0.75rem;">Subtotal (per day): <strong id="subtotal">₹0</strong></p>
+          <p>Total (incl. 12% tax): <strong id="grandtotal">₹0</strong></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Explore India. All rights reserved.</p>
+  </footer>
+</body>
+</html>
