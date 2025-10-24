@@ -19,7 +19,6 @@ Built using modern technologies, Trip_Trail focuses on user experience, scalabil
 
 - **Frontend:** (Specify your stack, e.g. React, Vue.js, HTML/CSS/JS)
 - **Backend:** (Specify your stack, e.g. Node.js, Django, Flask)
-- **Database:** (e.g. MongoDB, PostgreSQL)
 - **Version Control:** Git & GitHub
 
 ## Workflow
